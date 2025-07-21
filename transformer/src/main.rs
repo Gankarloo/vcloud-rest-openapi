@@ -17,6 +17,7 @@ mod schema_tweaks;
 mod schemas;
 mod types;
 use anyhow::{Context, Result};
+use tracing::{info, warn, error, debug, instrument};
 
 #[macro_use]
 extern crate indexmap;

@@ -88,12 +88,11 @@ fn html_to_mimes(html: &str) -> impl Iterator<Item = String> + '_ {
 
 fn get_content_media_type(text: &str) -> Option<String> {
     lazy_static! {
-        static ref RE: Regex =
-            Regex::new(r"(application/(\*|(vnd\.vmware\.(?P<type>.+)))\+(xml|json))").unwrap();
+        static ref RE: Regex = Regex::new(r"(application/(\*|(vnd\.vmware\.(?P<type>.+)))\+(xml|json))")
+            .expect("Invalid regex pattern for content media type");
     }
-    return RE
-        .captures(text)
-        .and_then(|c| c.get(0).map(|m| m.as_str().to_string()));
+    RE.captures(text)
+        .and_then(|c| c.get(0).map(|m| m.as_str().to_string()))
 }
 
 fn get_content_element(text: &str) -> Option<String> {
